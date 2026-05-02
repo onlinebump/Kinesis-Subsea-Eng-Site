@@ -12,6 +12,9 @@ import {
   Phone,
   Mail,
   MapPin,
+  Facebook,
+  Linkedin,
+  Twitter,
 } from "lucide-react";
 import { desc } from "framer-motion/client";
 
@@ -343,43 +346,57 @@ export default function Navbar({ scrollY = 0 }: NavbarProps) {
   return (
     <header
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 mx-auto ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-gray-300/20"
-          : "bg-transparent backdrop-blur-none"
+      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 mx-auto ${
+        isScrolled ? "-translate-y-12" : "translate-y-0"
       }`}
       data-scrolled={isScrolled}
     >
-      {/* Main Navigation */}
-      <div className="flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-12 py-2 sm:py-3 md:py-4">
-        {/* Logo */}
-        <div className="flex items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <img
-              src={isScrolled ? "/logo-dark.svg" : "/logo-white.svg"}
-              alt="Kinesis Subsea Engineering Logo"
-              className={`w-auto transition-all duration-500 h-12 sm:h-14 md:h-16 lg:h-[84px] xl:h-[88px]`}
-            />
-          </Link>
+      {/* Top Mini Nav */}
+      <div className="min-h-[48px] py-1.5 md:py-0 md:h-12 bg-primary-blue border-b border-blue-800/50 flex items-center">
+        <div className="max-w-7xl mx-auto w-[92%] 2xl:w-full text-white/90 text-[11px] sm:text-sm flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-1 sm:space-x-6">
+          <div className="flex items-center space-x-1.5 sm:space-x-2">
+            <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
+            <a href="mailto:support@kinesis-subsea.com" className="hover:text-white transition-colors">support@kinesis-subsea.com</a>
+          </div>
+          <div className="flex items-center space-x-1.5 sm:space-x-2">
+            <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
+            <a href="tel:88840002424" className="hover:text-white transition-colors">(888) 4000-2424</a>
+          </div>
+          <div className="flex items-center space-x-3 sm:space-x-4 pl-2 sm:pl-6 border-l border-white/20 h-4 sm:h-5">
+            <Facebook className="w-3 h-3 sm:w-4 sm:h-4 hover:text-white cursor-pointer transition-colors" />
+            <Linkedin className="w-3 h-3 sm:w-4 sm:h-4 hover:text-white cursor-pointer transition-colors" />
+            <Twitter className="w-3 h-3 sm:w-4 sm:h-4 hover:text-white cursor-pointer transition-colors" />
+          </div>
         </div>
+      </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-          {menuItems.map((item, index) => (
-            <div key={index} className="relative group">
-              {item.submenu ? (
-                <>
-                  {/* Desktop: show a clickable Link for the parent title and a separate chevron button to toggle the submenu */}
-                  <div
-                    className={`flex items-center gap-1 px-3 xl:px-5 py-2 xl:py-3 rounded-lg font-medium text-base xl:text-[20px] transition-all duration-300 ${
-                      isScrolled
-                        ? openMenuIndex === index
+      {/* Main Navigation Wrapper */}
+      <div className="bg-white shadow-md relative z-40">
+        <div className="max-w-7xl mx-auto w-[92%] 2xl:w-full flex items-center justify-between py-2 sm:py-3 md:py-4">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center space-x-2">
+              <img
+                src="/logo-dark.svg"
+                alt="Kinesis Subsea Engineering Logo"
+                className="w-auto h-12 sm:h-14 md:h-16 lg:h-[84px] xl:h-[88px]"
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+            {menuItems.map((item, index) => (
+              <div key={index} className="relative group">
+                {item.submenu ? (
+                  <>
+                    {/* Desktop: show a clickable Link for the parent title and a separate chevron button to toggle the submenu */}
+                    <div
+                      className={`flex items-center gap-1 px-3 xl:px-5 py-2 xl:py-3 rounded-lg font-medium text-base xl:text-[20px] transition-all duration-300 ${
+                        openMenuIndex === index
                           ? "bg-blue-50 text-primary-blue-hover"
                           : "text-gray-800 hover:bg-blue-50 hover:text-primary-blue-hover"
-                        : openMenuIndex === index
-                        ? "bg-blue-50 text-primary-blue-hover"
-                        : "text-white hover:text-gray-300"
-                    }`}
+                      }`}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={() => handleMouseLeave(index)}
                   >
@@ -535,13 +552,7 @@ export default function Navbar({ scrollY = 0 }: NavbarProps) {
               ) : (
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-1 px-3 xl:px-5 py-2 xl:py-3 rounded-lg font-medium text-base xl:text-[20px] transition-all duration-300 ${
-                    isScrolled
-                      ? openMenuIndex === index
-                        ? "bg-blue-50 text-primary-blue-hover"
-                        : "text-gray-800 hover:bg-blue-50 hover:text-primary-blue-hover"
-                      : "text-white hover:text-gray-300"
-                  }`}
+                  className="flex items-center gap-1 px-3 xl:px-5 py-2 xl:py-3 rounded-lg font-medium text-base xl:text-[20px] transition-all duration-300 text-gray-800 hover:bg-blue-50 hover:text-primary-blue-hover"
                 >
                   {item.title}
                 </Link>
@@ -554,11 +565,7 @@ export default function Navbar({ scrollY = 0 }: NavbarProps) {
         <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
           <Link
             href="/contact-us"
-            className={`hidden md:inline-flex rounded-lg items-center font-medium py-4 md:py-5 px-6 md:px-10 xl:px-14 text-base xl:text-lg transition-all duration-300 transform hover:-translate-y-0.5 ${
-              isScrolled
-                ? "bg-primary-blue hover:bg-primary-blue-hover text-white"
-                : "bg-white hover:bg-gray-100 text-gray-900"
-            }`}
+            className="hidden md:inline-flex rounded-lg items-center font-medium py-4 md:py-5 px-6 md:px-10 xl:px-14 text-base xl:text-lg transition-all duration-300 transform hover:-translate-y-0.5 bg-primary-blue hover:bg-primary-blue-hover text-white shadow-md"
           >
             <span className="flex items-center gap-1 text-base xl:text-[20px]">
               Contact Us
@@ -715,6 +722,7 @@ export default function Navbar({ scrollY = 0 }: NavbarProps) {
             </div>
           ))}
         </nav>
+      </div>
       </div>
     </header>
   );

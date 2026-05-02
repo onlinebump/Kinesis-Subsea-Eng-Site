@@ -2,8 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { useSmoothScrollbar } from "@/app/utils/SmoothScrollbarProvider";
-
 type NavLink = { href: string; label: string };
 
 interface ContentPayload {
@@ -39,41 +37,21 @@ export default function SectorBanner({
   height = "h-72 sm:h-96 lg:h-[520px]",
   children,
 }: SectorBannerProps): React.ReactElement {
-  const { scrollbar } = useSmoothScrollbar();
   const bgRef = useRef<HTMLDivElement | null>(null);
   const [offsetY, setOffsetY] = useState(0);
 
   useEffect(() => {
-    let attached = false;
-    let listener: ((arg: any) => void) | null = null;
-
-    if (scrollbar && bgRef.current) {
-      listener = ({ offset }: { offset: { y: number } }) => {
-        setOffsetY(offset.y);
-      };
-      scrollbar.addListener(listener);
-      attached = true;
-      // initial
-      setOffsetY(scrollbar.offset.y ?? 0);
-    }
-
-    if (!attached) {
-      // fallback to window scrolling
-      const onScroll = () => setOffsetY(window.scrollY || 0);
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-      listener = onScroll;
-    }
+    const onScroll = () => {
+      setOffsetY(window.scrollY || 0);
+    };
+    
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // Set initial value
 
     return () => {
-      if (listener && scrollbar && (scrollbar as any).removeListener) {
-        scrollbar.removeListener(listener as any);
-      }
-      if (!attached && typeof window !== "undefined") {
-        window.removeEventListener("scroll", listener as any);
-      }
+      window.removeEventListener("scroll", onScroll);
     };
-  }, [scrollbar]);
+  }, []);
 
   // parallax strength
   const parallax = Math.min(

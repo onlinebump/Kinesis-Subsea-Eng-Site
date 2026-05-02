@@ -1,22 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Flame, Leaf, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Flame, Leaf, CheckCircle } from "lucide-react";
 
 export default function SectorLayout() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeSector, setActiveSector] = useState<number>(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const sectors = [
     {
       id: "oil-gas",
+      num: "01",
       title: "Oil & Gas",
-      subtitle: "Sustainable Power Solutions",
-      description: "Advanced engineering systems and smart technologies for sustainable power distribution & management across deep-water and industrial sectors.",
-      icon: <Flame className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1200",
-      gradient: "from-slate-900 via-slate-900/60 to-blue-900/30",
+      subtitle: "Deepwater & Industrial Solutions",
+      description: "Advanced engineering systems and smart technologies for sustainable power distribution & management across demanding offshore and industrial sectors.",
+      icon: <Flame className="w-8 h-8 text-blue-400" />,
+      image: "https://images.pexels.com/photos/15085029/pexels-photo-15085029.jpeg",
       accent: "text-blue-400",
-      buttonPrimary: "bg-blue-600 border-blue-600 text-white",
+      buttonPrimary: "bg-blue-600 hover:bg-blue-500 shadow-blue-500/30",
       link: "/sectors/oil-gas",
       features: [
         "Smart Grid Technology",
@@ -27,14 +29,14 @@ export default function SectorLayout() {
     },
     {
       id: "renewables",
+      num: "02",
       title: "Renewables",
       subtitle: "Clean Technology Innovation",
       description: "Comprehensive renewable energy solutions including offshore wind, solar, and hydroelectric systems for sustainable industrial operations.",
-      icon: <Leaf className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=1200",
-      gradient: "from-slate-900 via-slate-900/60 to-emerald-900/30",
+      icon: <Leaf className="w-8 h-8 text-emerald-400" />,
+      image: "https://images.pexels.com/photos/35007721/pexels-photo-35007721.jpeg",
       accent: "text-emerald-400",
-      buttonPrimary: "bg-emerald-600 border-emerald-600 text-white",
+      buttonPrimary: "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-500/30",
       link: "/sectors/renewable-energy",
       features: [
         "Offshore Wind Farms",
@@ -45,102 +47,137 @@ export default function SectorLayout() {
     }
   ];
 
+  // Auto cycle through sectors if not hovering and user hasn't manually interacted
+  useEffect(() => {
+    if (isHovering || hasInteracted) return;
+    const interval = setInterval(() => {
+      setActiveSector((prev) => (prev === 0 ? 1 : 0));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [isHovering, hasInteracted]);
+
   return (
-    <section className="relative w-full bg-slate-950 overflow-hidden">
-      {/* Centered Floating Title */}
-      <div className="absolute top-12 lg:top-20 left-0 w-full z-30 flex justify-center pointer-events-none px-6">
-        <div className="text-center bg-slate-950/50 backdrop-blur-md py-4 px-8 rounded-2xl border border-white/10 shadow-2xl">
-          <h2 className="text-white font-bold tracking-widest uppercase text-xs mb-1 opacity-70">Our Expertise</h2>
-          <h3 className="text-2xl md:text-3xl text-white font-black uppercase tracking-tight">Specialized Sectors</h3>
+    <section 
+      className="relative w-full h-auto lg:h-[100vh] min-h-[900px] bg-slate-950 overflow-hidden flex items-center py-20 lg:py-0"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Background Images with Crossfade */}
+      {sectors.map((sector, idx) => (
+        <div 
+          key={sector.id}
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+            activeSector === idx ? "opacity-100 z-0" : "opacity-0 -z-10"
+          }`}
+        >
+          <img 
+            src={sector.image} 
+            alt={sector.title}
+            className={`w-full h-full object-cover transition-transform duration-[15000ms] ease-out ${
+              activeSector === idx ? "scale-110" : "scale-100"
+            }`}
+          />
         </div>
-      </div>
+      ))}
 
-      <div className="flex flex-col lg:flex-row w-full h-[1400px] lg:h-[100vh] lg:min-h-[850px]">
-        {sectors.map((sector, index) => {
-          const isHovered = hoveredIndex === index;
-          const isOtherHovered = hoveredIndex !== null && hoveredIndex !== index;
+      {/* Dark Overlay for Text Readability */}
+      <div className="absolute inset-0 bg-slate-950/70 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-10" />
 
-          return (
+      {/* Content Container */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+        
+        {/* Left: Massive Typography Menu */}
+        <div className="flex flex-col gap-8 w-full flex-1 min-w-0">
+          <div className="mb-2">
+            <h4 className="text-primary-blue font-bold tracking-[0.2em] uppercase text-sm flex items-center gap-3">
+              <span className="w-8 h-[2px] bg-primary-blue"></span>
+              Core Sectors
+            </h4>
+          </div>
+
+          <div className="flex flex-col gap-4 lg:gap-2">
+            {sectors.map((sector, idx) => (
+              <div 
+                key={sector.id}
+                onMouseEnter={() => {
+                  setActiveSector(idx);
+                  setHasInteracted(true);
+                }}
+                onClick={() => {
+                  setActiveSector(idx);
+                  setHasInteracted(true);
+                }}
+                className="group cursor-pointer flex flex-col"
+              >
+                <div className="flex items-start lg:items-end gap-3 lg:gap-4 whitespace-nowrap">
+                  <span className={`text-xl lg:text-2xl font-bold mt-2 lg:mt-0 lg:mb-4 transition-colors duration-500 shrink-0 ${
+                    activeSector === idx ? sector.accent : "text-white/30"
+                  }`}>
+                    {sector.num}
+                  </span>
+                  <h2 
+                    className={`text-[clamp(2.5rem,11vw,4rem)] md:text-6xl lg:text-[clamp(3.5rem,5vw,5.5rem)] font-black uppercase tracking-tighter transition-all duration-500 ease-out leading-[0.9] lg:leading-[0.85]`}
+                    style={{ 
+                      WebkitTextStroke: activeSector === idx ? '0px' : '1px rgba(255,255,255,0.2)',
+                      color: activeSector === idx ? 'white' : 'transparent',
+                      transform: activeSector === idx ? 'translateX(10px)' : 'translateX(0px)'
+                    }}
+                  >
+                    {sector.title}
+                  </h2>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: Premium Glassmorphic Details Card */}
+        <div className="w-full lg:w-[480px] xl:w-[500px] shrink-0 relative h-[600px] md:h-[500px] lg:h-[550px] mt-8 lg:mt-0">
+          {sectors.map((sector, idx) => (
             <div 
               key={sector.id}
-              className={`relative overflow-hidden group flex-1 transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${
-                isHovered ? "lg:flex-[1.4]" : isOtherHovered ? "lg:flex-[0.7]" : ""
-              }`}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className={`absolute top-0 left-0 w-full bg-white/5 backdrop-blur-2xl border border-white/10 p-8 lg:p-10 rounded-[2rem] transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] shadow-2xl
+                ${activeSector === idx ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto z-10' : 'opacity-0 translate-y-24 scale-95 pointer-events-none z-0'}
+              `}
             >
-               {/* Background Image */}
-               <div className="absolute inset-0 w-full h-full">
-                 <img 
-                   src={sector.image} 
-                   alt={sector.title}
-                   className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${
-                     isHovered ? "scale-110" : "scale-100"
-                   }`}
-                 />
-                 <div className={`absolute inset-0 bg-black transition-opacity duration-700 ${
-                   isOtherHovered ? "opacity-60" : "opacity-0"
-                 }`} />
-               </div>
+              <div className="flex justify-between items-start mb-8">
+                <div className={`p-4 rounded-2xl bg-slate-900/50 border border-white/10 shadow-inner`}>
+                  {sector.icon}
+                </div>
+                <div className={`text-6xl font-black opacity-[0.07] ${sector.accent} leading-none tracking-tighter`}>
+                  {sector.num}
+                </div>
+              </div>
 
-               {/* Gradient Overlay */}
-               <div className={`absolute inset-0 bg-gradient-to-t ${sector.gradient} opacity-95`} />
-               <div className="absolute inset-0 bg-slate-950/20" />
-               
-               {/* Content */}
-               <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 lg:p-20 z-10">
-                 
-                 <div className="max-w-xl">
-                   {/* Icon */}
-                   <div className={`w-14 h-14 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center text-white mb-6 transform transition-all duration-500 shadow-xl ${
-                     isHovered ? "translate-y-0 opacity-100 scale-110" : "translate-y-0 opacity-80 scale-100"
-                   }`}>
-                     {sector.icon}
-                   </div>
+              <h3 className="text-2xl font-bold text-white mb-3">
+                {sector.subtitle}
+              </h3>
+              
+              <p className="text-white/70 leading-relaxed mb-8 text-sm lg:text-base">
+                {sector.description}
+              </p>
 
-                   <h4 className={`text-sm font-bold tracking-widest uppercase mb-3 ${sector.accent} drop-shadow-md`}>
-                     {sector.subtitle}
-                   </h4>
-                   
-                   <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-xl">
-                     {sector.title}
-                   </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-4 mb-10">
+                {sector.features.map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle className={`w-4 h-4 ${sector.accent} shrink-0`} />
+                    <span className="text-white/90 text-sm font-medium">{feature}</span>
+                  </div>
+                ))}
+              </div>
 
-                   <p className="text-white/80 text-base md:text-lg leading-relaxed mb-8 max-w-md">
-                     {sector.description}
-                   </p>
-
-                   {/* Features List - Hidden on desktop until hover, visible on mobile */}
-                   <div className={`grid transition-all duration-700 ease-in-out ${
-                     isHovered ? "lg:grid-rows-[1fr] lg:opacity-100 lg:mt-8 lg:mb-8" : "lg:grid-rows-[0fr] lg:opacity-0 lg:mt-0 lg:mb-0"
-                   } grid-rows-[1fr] opacity-100 mt-8 mb-8`}>
-                      <div className="overflow-hidden">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {sector.features.map((feature, i) => (
-                            <div key={i} className="flex items-center gap-3">
-                              <CheckCircle2 className={`w-5 h-5 ${sector.accent}`} />
-                              <span className="text-white/90 text-sm font-medium">{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                   </div>
-
-                   <Link href={sector.link}>
-                     <div className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wide transition-all duration-300 border ${
-                       isHovered 
-                         ? `${sector.buttonPrimary} shadow-2xl scale-105` 
-                         : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border-white/20"
-                     }`}>
-                       Explore Sector
-                       <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${isHovered ? "translate-x-1" : ""}`} />
-                     </div>
-                   </Link>
-                 </div>
-               </div>
+              <Link 
+                href={sector.link}
+                className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wide transition-all duration-300 text-white shadow-lg ${sector.buttonPrimary} hover:scale-105`}
+              >
+                Explore Sector
+                <ArrowUpRight className="w-5 h-5" />
+              </Link>
             </div>
-          )
-        })}
+          ))}
+        </div>
+        
       </div>
     </section>
   );

@@ -4,8 +4,6 @@ import { useLoading } from "@/app/utils/context/LoadingContext";
 import LoadingScreen from "@/app/utils/LoadingScreen";
 import Navbar from "@/components/common/Navbar";
 // import Footer from "@/components/common/Footer";
-import SmoothScrollbarProvider from "@/app/utils/SmoothScrollbarProvider";
-
 const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {

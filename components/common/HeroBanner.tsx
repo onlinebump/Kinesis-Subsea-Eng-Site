@@ -14,7 +14,7 @@ const services = [
     icon: Zap,
   },
   {
-    title: "Sustainable Refining Technologies",
+    title: "Sustainable Refining Tech",
     description: "Porttitor nisl interdum sollicitudin pellentesque tincidunt velit laoreet lobortis enim eget ultrices.",
     icon: Factory,
   },

@@ -50,11 +50,7 @@ export default function NewsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 1 }}
+          <div
             className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 backdrop-blur-sm border border-gray-200  mb-6"
             style={{ lineHeight: 1.2 }}
           >
@@ -65,56 +61,17 @@ export default function NewsSection() {
             >
               LATEST UPDATES
             </span>
-          </motion.div>
+          </div>
 
-          {/* Animated headline */}
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
-            variants={{
-              visible: { transition: { staggerChildren: 0.04 } },
-            }}
-            style={{ lineHeight: 1.1 }}
-          >
-            <span
-              className="block text-gray-900 font-bold"
-              style={{ lineHeight: 1.1 }}
-            >
-              {Array.from("NEWS &").map((char, i) => (
-                <motion.span
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.3 }}
-                  style={{ display: "inline-block" }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
+          {/* Headline */}
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ lineHeight: 1.1 }}>
+            <span className="block text-gray-900 font-bold" style={{ lineHeight: 1.1 }}>
+              NEWS &
             </span>
-            <span
-              className="block bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 bg-clip-text text-transparent font-bold"
-              style={{ lineHeight: 1.1 }}
-            >
-              {Array.from("INDUSTRY INSIGHTS").map((char, i) => (
-                <motion.span
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.3, delay: i * 0.04 }}
-                  style={{ display: "inline-block" }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
+            <span className="block bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 bg-clip-text text-transparent font-bold" style={{ lineHeight: 1.1 }}>
+              INDUSTRY INSIGHTS
             </span>
-          </motion.h2>
+          </h2>
 
           <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             Stay updated with the latest developments, industry insights, and

@@ -356,11 +356,11 @@ export default function Navbar({ scrollY = 0 }: NavbarProps) {
         <div className="max-w-7xl mx-auto w-[92%] 2xl:w-full text-white/90 text-[11px] sm:text-sm flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-1 sm:space-x-6">
           <div className="flex items-center space-x-1.5 sm:space-x-2">
             <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
-            <a href="mailto:support@kinesis-subsea.com" className="hover:text-white transition-colors">support@kinesis-subsea.com</a>
+            <a href="mailto:Shovon.mostofa@kinesissubsea.com" className="hover:text-white transition-colors">Shovon.mostofa@kinesissubsea.com</a>
           </div>
           <div className="flex items-center space-x-1.5 sm:space-x-2">
             <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
-            <a href="tel:88840002424" className="hover:text-white transition-colors">(888) 4000-2424</a>
+            <a href="tel:+447832921562" className="hover:text-white transition-colors">+44 7832 921562</a>
           </div>
           <div className="flex items-center space-x-3 sm:space-x-4 pl-2 sm:pl-6 border-l border-white/20 h-4 sm:h-5">
             <Facebook className="w-3 h-3 sm:w-4 sm:h-4 hover:text-white cursor-pointer transition-colors" />

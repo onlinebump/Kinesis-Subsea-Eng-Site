@@ -147,43 +147,13 @@ const RecentProjectsSection: React.FC = () => {
           </div>
 
           {/* Framer Motion Animations - Animate on every viewport entry */}
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-          >
-            {/* Animate each letter of RECENT */}
-            {"RECENT".split("").map((char, i) => (
-              <motion.span
-                key={`recent-${i}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.4, delay: 0.15 + i * 0.07 }}
-                style={{ display: "inline-block" }}
-              >
-                {char}
-              </motion.span>
-            ))}
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            RECENT
             <br />
-            {/* Animate each letter of PROJECTS */}
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-orange to-primary-orange-hover">
-              {"PROJECTS".split("").map((char, i) => (
-                <motion.span
-                  key={`projects-${i}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.4, delay: 0.6 + i * 0.07 }}
-                  style={{ display: "inline-block" }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+              PROJECTS
             </span>
-          </motion.h2>
+          </h2>
 
           <p className="text-slate-300 text-xl max-w-2xl leading-relaxed">
             Delivering excellence across industries with cutting-edge

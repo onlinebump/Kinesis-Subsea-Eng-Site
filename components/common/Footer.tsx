@@ -59,16 +59,10 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-semibold mb-6">Phone Number</h3>
             <div className="space-y-2 mb-8">
               <a
-                href="tel:+971551579261"
+                href="tel:+447832921562"
                 className="block text-gray-300 hover:text-white transition-colors"
               >
-                +971 551 579 261
-              </a>
-              <a
-                href="tel:+971555961659"
-                className="block text-gray-300 hover:text-white transition-colors"
-              >
-                +97 155 596 1659
+                +44 7832 921562
               </a>
             </div>
 
@@ -104,19 +98,21 @@ const Footer: React.FC = () => {
           {/* Office Address */}
           <div>
             <h3 className="text-xl font-semibold mb-6">Office Address</h3>
-            <address className="text-gray-300 not-italic mb-8">
-              42 Mamnoun Street, Saba
+            <address className="text-gray-300 not-italic mb-8 leading-relaxed">
+              8 Laverock Braes Crescent
               <br />
-              Carpet and Antiques Store, UK
+              Grandhome, Aberdeen
+              <br />
+              AB22 9AD
             </address>
 
             <h3 className="text-xl font-semibold mb-6">Email Address</h3>
             <p className="text-gray-300 mb-2">Interested in working with us?</p>
             <a
-              href="mailto:kinesis@gmail.com"
+              href="mailto:Shovon.mostofa@kinesissubsea.com"
               className="text-blue-400 hover:text-blue-300 transition-colors"
             >
-              kinesis@gmail.com
+              Shovon.mostofa@kinesissubsea.com
             </a>
           </div>
 
@@ -193,9 +189,12 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright */}
-        <div className="pt-8 border-t border-white/10 text-center">
-          <p className="text-gray-400">
-            ©️ 2025 Kinesis. Designed by TruedgeDigital.
+        <div className="pt-8 border-t border-white/10 text-center space-y-2">
+          <p className="text-gray-400 text-sm">
+            ©️ 2026 Kinesis. Designed by <a href="https://www.truedgedigital.co.uk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Truedge Digital</a>.
+          </p>
+          <p className="text-gray-500 text-xs">
+            Company Number SC778538
           </p>
         </div>
       </div>

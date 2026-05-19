@@ -48,9 +48,9 @@ const ContactUs: React.FC = () => {
     {
       city: "Aberdeen",
       country: "United Kingdom",
-      address: "45 Energy Park, Offshore Technology Centre, AB23 8GX",
-      phone: "+44 (0) 1224 567890",
-      email: "aberdeen@kinesissubsea.com",
+      address: "8 Laverock Braes Crescent, Grandhome, Aberdeen, AB22 9AD",
+      phone: "+44 7832 921562",
+      email: "Shovon.mostofa@kinesissubsea.com",
       timezone: "GMT",
     },
     {
@@ -350,7 +350,7 @@ const ContactUs: React.FC = () => {
                     <div className="font-medium text-gray-900">
                       Global Hotline
                     </div>
-                    <div className="text-gray-700">+44 (0) 1224 567890</div>
+                    <div className="text-gray-700">+44 7832 921562</div>
                   </div>
                 </div>
 
@@ -360,7 +360,7 @@ const ContactUs: React.FC = () => {
                     <div className="font-medium text-gray-900">
                       General Inquiries
                     </div>
-                    <div className="text-gray-700">info@kinesissubsea.com</div>
+                    <div className="text-gray-700">Shovon.mostofa@kinesissubsea.com</div>
                   </div>
                 </div>
 
@@ -371,6 +371,16 @@ const ContactUs: React.FC = () => {
                       Response Time
                     </div>
                     <div className="text-gray-700">Within 24 hours</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center">
+                  <Building className="w-5 h-5 text-primary-blue mr-3" />
+                  <div>
+                    <div className="font-medium text-gray-900">
+                      Company Number
+                    </div>
+                    <div className="text-gray-700">SC778538</div>
                   </div>
                 </div>
               </div>
@@ -415,7 +425,7 @@ const ContactUs: React.FC = () => {
                 operations.
               </p>
               <div className="font-bold text-red-800">
-                Emergency Line: +44 (0) 1224 999999
+                Emergency Line: +44 7832 921562
               </div>
             </div>
           </div>
@@ -441,7 +451,7 @@ const ContactUs: React.FC = () => {
               <div className="relative overflow-hidden  shadow">
                 <iframe
                   title="Kinesis Subsea - Aberdeen office"
-                  src="https://www.google.com/maps?q=57.1497,-2.0943&z=14&output=embed"
+                  src="https://www.google.com/maps?q=57.1906,-2.1287&z=14&output=embed"
                   className="w-full h-96 border-0"
                   allowFullScreen
                 />
@@ -451,26 +461,26 @@ const ContactUs: React.FC = () => {
             <div className="bg-white p-6 shadow">
               <h3 className="text-xl font-bold mb-2">Aberdeen Office</h3>
               <div className="text-gray-700 mb-4">
-                45 Energy Park, Offshore Technology Centre
+                8 Laverock Braes Crescent, Grandhome
                 <br />
-                Aberdeen AB23 8GX, United Kingdom
+                Aberdeen AB22 9AD, United Kingdom
               </div>
 
               <div className="space-y-3">
                 <div className="flex items-center">
                   <MapPin className="w-5 h-5 text-primary-blue mr-3" />
                   <span className="text-gray-700">
-                    Coordinates: 57.1497, -2.0943
+                    Coordinates: 57.1906, -2.1287
                   </span>
                 </div>
 
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 text-primary-blue mr-3" />
-                  <span className="text-gray-700">+44 (0) 1224 567890</span>
+                  <span className="text-gray-700">+44 7832 921562</span>
                 </div>
 
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=57.1497,-2.0943"
+                  href="https://www.google.com/maps/dir/?api=1&destination=57.1906,-2.1287"
                   target="_blank"
                   rel="noopener"
                   className="inline-block mt-4 bg-primary-blue text-white px-4 py-2  hover:bg-primary-blue-hover"
